@@ -5,18 +5,18 @@
 <head>
 
 
-<meta charset='utf-8'>
-<meta name="viewport" content="initial-scale=1.0, width=device-width" />
-<title>WITNESS</title>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <title>WITNESS</title>
 
 
-<script type="text/javascript" src='../test-credentials.js'></script>
+    <script type="text/javascript" src='../test-credentials.js'></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
-  <script type="text/javascript" src='../js-examples-rendering-helpers/iframe-height.js'></script>
-<link rel="stylesheet" href="demo.css" type="text/css">
+    <script type="text/javascript" src='../js-examples-rendering-helpers/iframe-height.js'></script>
+    <link rel="stylesheet" href="demo.css" type="text/css">
 
 
 </head>
@@ -27,64 +27,125 @@
 
 <div id="content">
 
-<h1>Crash Map</h1>
+    <h1>Crash Map</h1>
+<
+    <div id="map" onclick=window.location.href='http://www.google.com'></div>
+    <input type="text"> <button type="submit"> Search </button>
+    <script>
+        /**
+         * Moves the map to display over Berlin
+         *
+         * @param  {H.Map} map      A HERE Map instance within the application
+         */
 
-<div id="map"></div>
+        function moveMapToBerlin(map) {
+            map.setCenter({lat: 49.2817164, lng: -123.1001642});
+            map.setZoom(11);
+            var parisMarker = new H.map.Marker({
+                lat: 49.309558
+                , lng: -123.143752
+            });
+            map.addObject(parisMarker);
 
-<script>
-/**
- * Moves the map to display over Berlin
- *
- * @param  {H.Map} map      A HERE Map instance within the application
- */
-function moveMapToBerlin(map){
-  map.setCenter({lat:49.2817164, lng:-123.1001642});
-  map.setZoom(12);
-}
+            var romeMarker = new H.map.Marker({
+                lat: 49.307484
+                , lng: -123.153444
+            });
+            map.addObject(romeMarker);
 
-/**
- * Boilerplate map initialization code starts below:
- */
+            var berlinMarker = new H.map.Marker({
+                lat: 49.302566
+                , lng: -123.12912
+            });
+            map.addObject(berlinMarker);
+
+            var madridMarker = new H.map.Marker({
+                lat: 49.299005
+                , lng: -123.026437
+            });
+            map.addObject(madridMarker);
+
+            var londonMarker = new H.map.Marker({
+                lat: 49.297403
+                , lng: -123.136087
+            });
+            map.addObject(londonMarker);
+///
+            var romeMarker = new H.map.Marker({
+                lat: 49.280576
+
+                , lng: -123.115205
+
+            });
+            map.addObject(romeMarker);
+
+            var berlinMarker = new H.map.Marker({
+                lat: 49.280536
+
+                , lng: -123.124983
+
+            });
+            map.addObject(berlinMarker);
+
+            var madridMarker = new H.map.Marker({
+                lat: 49.280381
+
+                , lng: -123.099699
+
+            });
+            map.addObject(madridMarker);
+
+            var londonMarker = new H.map.Marker({
+                lat: 49.277617
+
+                , lng: -123.096963
+
+            });
+            map.addObject(londonMarker);
+
+        }
+
+        /**
+         * Boilerplate map initialization code starts below:
+         */
 
 //Step 1: initialize communication with the platform
 // In your own code, replace variable window.apikey with your own apikey
-var platform = new H.service.Platform({
-  apikey: 'g_g51SYlMkLqyxOqau_WXFxQ_xY4EDCMk8GMlHu1KkU'
-});
-var defaultLayers = platform.createDefaultLayers();
+        var platform = new H.service.Platform({
+            apikey: 'g_g51SYlMkLqyxOqau_WXFxQ_xY4EDCMk8GMlHu1KkU'
+        });
+        var defaultLayers = platform.createDefaultLayers();
 
-//Step 2: initialize a map - this map is centered over Europe
-var map = new H.Map(document.getElementById('map'),
-  defaultLayers.vector.normal.map,{
-  center: {lat:49.2817164, lng:-123.1001642},
-  zoom: 10,
-  pixelRatio: window.devicePixelRatio || 1
-});
-// add a resize listener to make sure that the map occupies the whole container
-window.addEventListener('resize', () => map.getViewPort().resize());
+        //Step 2: initialize a map - this map is centered over Europe
+        var map = new H.Map(document.getElementById('map'),
+            defaultLayers.vector.normal.map, {
+                center: {lat: 49.2817164, lng: -123.1001642},
+                zoom: 11,
+                pixelRatio: window.devicePixelRatio || 1
+            });
+        // add a resize listener to make sure that the map occupies the whole container
+        window.addEventListener('resize', () => map.getViewPort().resize());
 
-//Step 3: make the map interactive
-// MapEvents enables the event system
-// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
-var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+        //Step 3: make the map interactive
+        // MapEvents enables the event system
+        // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+        var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 
-// Create the default UI components
-var ui = H.ui.UI.createDefault(map, defaultLayers);
+        // Create the default UI components
+        var ui = H.ui.UI.createDefault(map, defaultLayers);
 
-// Now use the map as required...
-window.onload = function () {
-  moveMapToBerlin(map);
-}
+        // Now use the map as required...
+        window.onload = function () {
+            moveMapToBerlin(map);
+        }
 
     </script>
-
 
 
 </div>
 
 
 </body>
-
 
 
 </html>
